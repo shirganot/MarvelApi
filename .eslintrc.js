@@ -11,7 +11,6 @@ module.exports = {
   plugins: ['prettier'],
   rules: {
     'prettier/prettier': ['error'],
-
     'brace-style': ['error', 'stroustrup'],
     'comma-dangle': ['error', 'never'],
     'no-unused-vars': ['warn'],

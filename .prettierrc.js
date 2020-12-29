@@ -9,4 +9,5 @@ module.exports = {
   bracketSpacing: true,
   arrowParens: 'always',
   endOfLine: 'auto',
+  Semicolons: true,
 };
