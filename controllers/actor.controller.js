@@ -19,7 +19,7 @@ const getAllActorsMovies = () => {
           if (moviesListIds.includes(movieId)) {
             acc.push({
               name: movieName,
-              id: movieId,
+              id: movieId
             });
           }
           return acc;
@@ -51,13 +51,13 @@ const getActorsWhoPlayedMultipuleCharacters = () => {
 
           if (aco[actorId]) {
             const characterExist = aco[actorId].characters.some(
-              (characterName) => compareTwoStrings(characterName, newCharacter) > 0.6,
+              (characterName) => compareTwoStrings(characterName, newCharacter) > 0.6
             );
             if (!characterExist) aco[actorId].characters.push(newCharacter);
           } else {
             aco[actorId] = {
               name: actorName,
-              characters: [newCharacter],
+              characters: [newCharacter]
             };
           }
         }
@@ -91,12 +91,12 @@ const getActorsWhoPlayedTheSameRole = () => {
           const { character: newCharacter } = castMember;
 
           const similarProperty = Object.keys(cao).find(
-            (key) => compareTwoStrings(key, newCharacter) > 0.7,
+            (key) => compareTwoStrings(key, newCharacter) > 0.7
           );
 
           if (similarProperty) {
             const actorExist = cao[similarProperty].some(
-              ({ id: existActorId }) => existActorId === actorId,
+              ({ id: existActorId }) => existActorId === actorId
             );
             if (!actorExist) cao[similarProperty].push({ name: actorName, id: actorId });
           } else cao[newCharacter] = [{ name: actorName, id: actorId }];
@@ -116,5 +116,5 @@ const getActorsWhoPlayedTheSameRole = () => {
 module.exports = {
   getAllActorsMovies,
   getActorsWhoPlayedMultipuleCharacters,
-  getActorsWhoPlayedTheSameRole,
+  getActorsWhoPlayedTheSameRole
 };

@@ -6,7 +6,7 @@ const getMovieCast = (movieId) => {
     try {
       const res = await axios.get(`/movie/${movieId}/credits`);
       const {
-        data: { cast },
+        data: { cast }
       } = res;
 
       resolve(cast);
@@ -17,5 +17,5 @@ const getMovieCast = (movieId) => {
 };
 
 module.exports = {
-  getMovieCast,
+  getMovieCast
 };

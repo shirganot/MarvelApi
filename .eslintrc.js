@@ -2,11 +2,11 @@ module.exports = {
   env: {
     browser: true,
     commonjs: true,
-    es2021: true,
+    es2021: true
   },
   extends: ['prettier', 'airbnb-base'],
   parserOptions: {
-    ecmaVersion: 12,
+    ecmaVersion: 12
   },
   plugins: ['prettier'],
   rules: {
@@ -15,6 +15,6 @@ module.exports = {
     'comma-dangle': ['error', 'never'],
     'no-unused-vars': ['warn'],
     'no-var': ['off'],
-    'one-var': ['off'],
-  },
+    'one-var': ['off']
+  }
 };

@@ -1,19 +1,20 @@
 require('dotenv').config();
 const createError = require('http-errors');
 const express = require('express');
-var path = require('path');
+const path = require('path');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const debug = require('debug')('marvel-api:server');
 const http = require('http');
 const cors = require('cors');
+const { DEFAULT_PORT } = require('./constants');
 
 const app = express();
 
 app.set('view engine', 'jade');
 const corsOptions = {
   origin: true,
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
 app.use(cors(corsOptions));
@@ -25,13 +26,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', require('./routes'));
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 app.use(require('./middlewares/errorHandler'));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || DEFAULT_PORT;
 app.set('port', port);
 
 const server = http.createServer(app);
@@ -53,11 +54,9 @@ function onError(error) {
     case 'EACCES':
       console.error(bind + ' requires elevated privileges');
       process.exit(1);
-      break;
     case 'EADDRINUSE':
       console.error(bind + ' is already in use');
       process.exit(1);
-      break;
     default:
       throw error;
   }

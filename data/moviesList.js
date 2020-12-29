@@ -4,7 +4,7 @@ module.exports = Object.freeze({
   'Iron Man': 1726,
   'The Incredible Hulk': 1724,
   'Iron Man 2': 10138,
-  'Thor': 10195,
+  Thor: 10195,
   'Captain America: The First Avenger': 1771,
   'The Avengers': 24428,
   'Iron Man 3': 68721,
@@ -24,5 +24,5 @@ module.exports = Object.freeze({
   'Ant-Man and the Wasp': 363088,
   'Captain Marvel': 299537,
   'Avengers: Endgame': 299534,
-  'Spider-Man: Far From Home': 429617,
+  'Spider-Man: Far From Home': 429617
 });

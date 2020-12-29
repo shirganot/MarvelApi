@@ -29,5 +29,5 @@ const getActorMoviesInfo = (actorId) => {
 
 module.exports = {
   getActorId,
-  getActorMoviesInfo,
+  getActorMoviesInfo
 };

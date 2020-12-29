@@ -23,5 +23,5 @@ module.exports = Object.freeze([
   // 'Black Panther',
   'Chadwick Boseman',
   'Samuel L. Jackson',
-  'Dave Bautista',
+  'Dave Bautista'
 ]);

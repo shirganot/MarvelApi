@@ -5,9 +5,9 @@ module.exports = {
   semi: true,
   singleQuote: true,
   quoteProps: 'as-needed',
-  trailingComma: 'all',
+  trailingComma: 'none',
   bracketSpacing: true,
   arrowParens: 'always',
   endOfLine: 'auto',
-  Semicolons: true,
+  Semicolons: true
 };
