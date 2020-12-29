@@ -1,12 +1,12 @@
-const { StringUtils } = require('turbocommons-ts');
+const { compareTwoStrings } = require('string-similarity');
 
 const movieService = require('../services/movie.service');
 const moviesList = require('../data/moviesList');
+const moviesListIds = Object.values(moviesList);
 
 const getActorsWhoPlayedMultipuleCharacters = () => {
   return new Promise(async (resolve, reject) => {
     try {
-      const moviesListIds = Object.values(moviesList);
       //actors characters object
       const aco = {};
 
@@ -17,11 +17,10 @@ const getActorsWhoPlayedMultipuleCharacters = () => {
           const { id: actorId, character: newCharacter, name } = castMember;
 
           if (aco[actorId]) {
-            const similar = aco[actorId].characters.some(
-              (characterName) =>
-                StringUtils.compareSimilarityPercent(characterName, newCharacter) > 40,
+            const characterExist = aco[actorId].characters.some(
+              (characterName) => compareTwoStrings(characterName, newCharacter) > 0.6,
             );
-            if (!similar) aco[actorId].characters.push(newCharacter);
+            if (!characterExist) aco[actorId].characters.push(newCharacter);
           } else if (!aco[actorId]) {
             aco[actorId] = {
               name,
@@ -44,6 +43,42 @@ const getActorsWhoPlayedMultipuleCharacters = () => {
   });
 };
 
+const getActorsWhoPlayedTheSameRole = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      // characters actors object
+      const cao = {};
+
+      for (let movieId of moviesListIds) {
+        const movieCast = await movieService.getMovieCast(movieId);
+
+        for (let castMember of movieCast) {
+          const { id: actorId, character: newCharacter, name } = castMember;
+
+          const similarProperty = Object.keys(cao).find(
+            (key) => compareTwoStrings(key, newCharacter) > 0.7,
+          );
+
+          if (similarProperty) {
+            const actorExist = cao[similarProperty].some(
+              ({ id: existActorId }) => existActorId === actorId,
+            );
+            if (!actorExist) cao[similarProperty].push({ name, id: actorId });
+          } else cao[newCharacter] = [{ name, id: actorId }];
+        }
+      }
+
+      const filteredArr = Object.entries(cao).filter(([, actorsArr]) => actorsArr.length > 1);
+      const actorsWhoPlayTheSameRole = Object.fromEntries(filteredArr);
+
+      resolve(actorsWhoPlayTheSameRole);
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
 module.exports = {
   getActorsWhoPlayedMultipuleCharacters,
+  getActorsWhoPlayedTheSameRole,
 };

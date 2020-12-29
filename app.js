@@ -11,7 +11,6 @@ const cors = require('cors');
 const app = express();
 
 app.set('view engine', 'jade');
-// app.set('views', path.join(__dirname, 'views'));
 const corsOptions = {
   origin: true,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
@@ -30,19 +29,9 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.send({ message: err.message });
-});
+app.use(require('./middlewares/errorHandler'));
 
 const port = process.env.PORT || 3000;
-console.log('🚀 ~ file: app.js ~ line 45 ~ port', port);
 app.set('port', port);
 
 const server = http.createServer(app);
@@ -50,6 +39,7 @@ const server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+console.log('Listening on port', port);
 
 function onError(error) {
   if (error.syscall !== 'listen') {

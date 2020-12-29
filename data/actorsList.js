@@ -19,9 +19,8 @@ module.exports = Object.freeze([
   'Anthony Mackie',
   'Tom Hiddleston',
   'Chris Pratt',
-  // Uncommend for error
+  // Uncomment for error ↓
   // 'Black Panther',
-  // And commend this ↓
   'Chadwick Boseman',
   'Samuel L. Jackson',
   'Dave Bautista',

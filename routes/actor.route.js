@@ -20,13 +20,13 @@ router.get('/moreThenOneCharacter', async (req, res, next) => {
   }
 });
 
-// router.get('/playedTheSameRole', async (req, res, next) => {
-//   try {
-//     const actors = await actorController.getActorsWhoPlayedMultipuleCharacters();
-//     res.json(actors);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+router.get('/playedTheSameRole', async (req, res, next) => {
+  try {
+    const actors = await actorController.getActorsWhoPlayedTheSameRole();
+    res.json(actors);
+  } catch (err) {
+    next(err);
+  }
+});
 
 module.exports = router;
