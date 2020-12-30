@@ -5,6 +5,30 @@ const actorsList = require('../data/actorsList');
 const moviesList = require('../data/moviesList');
 const moviesListIds = Object.values(moviesList);
 
+const getActorMovies = (actorName) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const actorId = await actorService.getActorId(actorName);
+      const actorMoviesInfo = await actorService.getActorMoviesInfo(actorId);
+
+      const actorMarvelMovies = actorMoviesInfo.reduce((acc, currVal) => {
+        const { id: movieId, original_title: movieName } = currVal;
+        if (moviesListIds.includes(movieId)) {
+          acc.push({
+            name: movieName,
+            id: movieId
+          });
+        }
+        return acc;
+      }, []);
+
+      resolve(actorMarvelMovies);
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
 const getAllActorsMovies = () => {
   return new Promise(async (resolve, reject) => {
     try {
@@ -114,6 +138,7 @@ const getActorsWhoPlayedTheSameRole = () => {
 };
 
 module.exports = {
+  getActorMovies,
   getAllActorsMovies,
   getActorsWhoPlayedMultipuleCharacters,
   getActorsWhoPlayedTheSameRole

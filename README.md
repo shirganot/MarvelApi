@@ -26,8 +26,12 @@ Organized in the order of the questions
 
 The official API.
 
-1. `/api/actors/movies`
-2. `/api/actors/moreThenOneCharacter`
+1. 2 approaches
+
+- `/api/actors/:actorName/movies` - for specific actor
+- `/api/actors/movies` - for all the actors stored in the project.
+
+2. `/api/actors/moreThanOneCharacter`
 3. `/api/actors/playedTheSameRole`
 
 ### Movies
@@ -38,7 +42,7 @@ This has been corrected in the official API, however, I left it under `/movies` 
 
 Enjoy:)
 
-2. `/api/movies/moreThenOneCharacter`
+2. `/api/movies/moreThanOneCharacter`
 3. `/api/movies/playedTheSameRole`
 
 ## Data
@@ -66,7 +70,4 @@ So, I used the names of the characters as identifiers, which is not a good pract
 
 ## Notes
 
-- I learned the basics of docker for this assignment. I tried to install Docker Desktop on my computer, to check if my docker file is correct, but I had issues.
-  My computer is pretty old, and I have the wrong version of windows - "windows 10 home".
-  I'm still trying to figure it out, However, I worked on it for a long time, which no longer makes sense for a file, which is a small part of the assignment. So, I wrote the .DockerFile "on blind".
 - The assignment was very fun to make:) The Marvel concept is a really cool idea. Thank you:)
